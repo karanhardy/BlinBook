@@ -1,0 +1,17 @@
+<form method="get" action="{% url 'store_home' %}">
+    <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<h2>Products</h2>
+<ul>
+    {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong><br>
+            {{ product.description }}<br>
+            ₹{{ product.price }}
+        </li>
+    {% empty %}
+        <li>No products found.</li>
+    {% end for %}
+</ul>

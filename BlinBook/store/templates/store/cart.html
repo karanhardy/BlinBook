@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+
+    {% if cart_items %}
+        <ul>
+            {% for item in cart_items %}
+                <li>
+            {{ item.product.name }} - ₹{{ item.product.price }} ×
+
+            <form action="{% url 'update_cart_quantity' item.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 50px;">
+                <button type="submit">Update</button>
+            </form>
+
+            = ₹{{ item.product.price|floatformat:2|add:""|add:item.quantity|floatformat:2 }}
+
+            <a href="{% url 'remove_from_cart' item.id %}">❌ Remove</a>
+                </li>
+            {% end for %}
+        </ul>
+
+        <p><strong>Total:</strong> ₹{{ total_price }}</p>
+        <a href="{% url 'product_list' %}">Continue Shopping</a>
+    {% else %}
+        <p>Your cart is empty.</p>
+        <a href="{% url 'product_list' %}">Browse Products</a>
+    {% endif %}
+
+    {% if cart_items %}
+    <form action="{% url 'checkout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Checkout</button>
+    </form>
+    {% endif %}
+</body>
+</html>

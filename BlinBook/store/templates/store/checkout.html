@@ -1,0 +1,14 @@
+<h2>Checkout</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Select Payment Method:</p>
+    {{ form.as_p }}
+
+    <button type="submit">Place Order</button>
+</form>
+
+<a href="{% url 'view_cart' %}">⬅ Back to Cart</a>
+<a href="{% url 'checkout' %}">
+    <button>Proceed to Checkout</button>
+</a>

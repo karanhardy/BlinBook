@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{product.name}}</title>
+</head>
+<body>
+    <h1>{{product.name}}</h1>
+    <p>{{product.description }}</p>
+    <p><strong>Price: </strong> ${{product.price}}</p>
+    <p><strong>Stock :</strong> {{product.stock}}</p>
+    <a href="/">Back to Products</a>
+    <a href = "{% url 'view_cart '%}">🛒View Cart</a>
+</body>
+</html>

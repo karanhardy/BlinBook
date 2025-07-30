@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <h1>All Products</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <a href = "{% url 'product_detail' product.pk %}">
+                {{product.name} - ${product.price}}
+            </a>
+        </li>
+        {% end for %}
+    </ul>
+< form method = "POST" action="{% url 'add_to_cart' product.id %}">
+    {% csrf_token %}
+    <button type="submit">Add to Cart</button>
+</body>
+</html>
+
